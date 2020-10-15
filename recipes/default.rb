@@ -1,6 +1,6 @@
 #
 # Author:: Jacob McCann (<jacob.mccann2@target.com>)
-# Cookbook Name:: network_interfaces_v2
+# Cookbook Name:: rcs-network_interfaces
 # Recipe:: default
 #
 # Copyright:: 2015, Target Corporation

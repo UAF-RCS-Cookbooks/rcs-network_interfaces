@@ -1,6 +1,6 @@
 #
 # Author:: Jacob McCann (<jacob.mccann2@target.com>)
-# Cookbook Name:: network_interfaces_v2
+# Cookbook Name:: rcs-network_interfaces
 # Provider:: rhel_network_interface
 #
 # Copyright:: 2015, Target Corporation
@@ -41,6 +41,7 @@ class Chef
 
           package 'bridge-utils' do
             not_if { new_resource.bridge_device.nil? }
+            only_if { node['platform_version'].to_i < 8 }
           end
 
           template "/etc/sysconfig/network-scripts/ifcfg-#{new_resource.device}" do

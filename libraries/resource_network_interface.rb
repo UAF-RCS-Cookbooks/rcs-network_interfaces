@@ -1,6 +1,6 @@
 #
 # Author:: Jacob McCann (<jacob.mccann2@target.com>)
-# Cookbook Name:: network_interfaces_v2
+# Cookbook Name:: rcs-network_interfaces
 # Resource:: network_interface
 #
 # Copyright:: 2015, Target Corporation
@@ -38,7 +38,7 @@ class Chef
 
         @bootproto = 'dhcp'
         @onboot = true
-        @cookbook = 'network_interfaces_v2'
+        @cookbook = 'rcs-network_interfaces'
         @source = 'ifcfg.erb'
         @reload = true
         @reload_type = :immediately

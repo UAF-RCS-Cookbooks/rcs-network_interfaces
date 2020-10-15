@@ -1,6 +1,6 @@
-Cookbook network_interfaces_v2
+Cookbook rcs-network_interfaces
 ==============================
-[![Build Status](https://travis-ci.org/target/network_interfaces_v2-cookbook.svg?branch=travis_ci)](https://travis-ci.org/target/network_interfaces_v2-cookbook)
+[![Build Status](https://travis-ci.org/target/rcs-network_interfaces-cookbook.svg?branch=travis_ci)](https://travis-ci.org/target/rcs-network_interfaces-cookbook)
 
 A cookbook containing providers for defining network interfaces.
 
@@ -16,12 +16,12 @@ Supported Platforms
 These operating systems are not currently being tested on but have been confirmed by other users to be working.
 
 * Windows 2008R2
-  * Works if PowerShell/WMF 4.0 is present, which can be installed via `network_interfaces_v2::powershell_installer` recipe
+  * Works if PowerShell/WMF 4.0 is present, which can be installed via `rcs-network_interfaces::powershell_installer` recipe
 
 Usage
 =====
 
-Add `depends 'network_interfaces_v2'` to your cookbook metadata.rb file.  This
+Add `depends 'rcs-network_interfaces'` to your cookbook metadata.rb file.  This
 will give you access to the providers documented below.
 
 Recipes
@@ -58,7 +58,7 @@ Attributes
 * post_up - Post up command(s) to run after modifying the interface
 * reload (default: true) - Wether or not to reload the device on config changes
 * reload_type (default: :immediately) - When to reload device on config changes
-* cookbook (default: 'network_interfaces_v2') - Cookbook to look for template files in
+* cookbook (default: 'rcs-network_interfaces') - Cookbook to look for template files in
 * source (default: 'ifcfg.erb') - Template file to use for interface config
 
 #### Debian Only Attributes

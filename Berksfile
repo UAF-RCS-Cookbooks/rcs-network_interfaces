@@ -1,6 +1,5 @@
-source 'https://supermarket.getchef.com'
+source 'https://supermarket.chef.io'
+source :chef_server
 
 metadata
 
-cookbook 'fake', path: 'test/fixtures/cookbooks/fake'
-cookbook 'net_setup', path: 'test/fixtures/cookbooks/net_setup'

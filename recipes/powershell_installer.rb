@@ -1,6 +1,6 @@
 #
 # Author:: Diego F. Duarte (<diego.fl.duarte@gmail.com>)
-# Cookbook Name:: network_interfaces_v2
+# Cookbook Name:: rcs-network_interfaces
 # Recipe:: powershell_installer.rb
 #
 # Copyright:: 2015
