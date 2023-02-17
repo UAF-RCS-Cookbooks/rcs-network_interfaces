@@ -72,6 +72,10 @@ class Chef
           set_or_return(:type, arg, kind_of: String)
         end
 
+        def uuid(arg = nil)
+          set_or_return(:uuid, arg, kind_of: String)
+        end
+        
         def devicetype(arg = nil)
           set_or_return(:devicetype, arg, kind_of: String)
         end

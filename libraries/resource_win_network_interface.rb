@@ -46,6 +46,10 @@ class Chef
           set_or_return(:hw_address, arg, kind_of: String, regex: /^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$/)
         end
 
+        def uuid(arg = nil)
+          set_or_return(:uuid, arg, kind_of: String)
+        end
+
         def index(arg = nil)
           set_or_return(:index, arg, kind_of: Integer)
         end

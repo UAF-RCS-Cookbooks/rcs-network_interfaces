@@ -2,6 +2,9 @@
 
 DEVICE="<%= @device %>"
 TYPE="<%= @type %>"
+<% if @uuid -%>
+UUID="<%= @uuid %>"
+<% end %>
 ONBOOT="<%= @onboot ? 'yes' : 'no' %>"
 BOOTPROTO="<%= @bootproto %>"
 <% if @bond_master -%>

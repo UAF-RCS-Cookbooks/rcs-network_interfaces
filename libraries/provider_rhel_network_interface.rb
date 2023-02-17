@@ -50,6 +50,7 @@ class Chef
             mode 0644
             variables device: new_resource.device,
                       type: new_resource.type,
+                      uuid: new_resource.uuid,
                       onboot: new_resource.onboot,
                       bootproto: new_resource.bootproto,
                       address: new_resource.address,
