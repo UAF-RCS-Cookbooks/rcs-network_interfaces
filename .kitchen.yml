@@ -1,9 +1,15 @@
 ---
 driver:
   name: vagrant
+#  provider: parallels
 
 provisioner:
   name: chef_zero
+  product_name: cinc
+  product_version: 18
+  chef_license: accept
+  client_rb:
+    ohai.optional_plugins: [":Passwd"]
 
 platforms:
   - name: ubuntu-14.04
@@ -15,9 +21,19 @@ platforms:
   - name: centos-7.2
     run_list:
       - recipe[net_setup::default]
-  - name: centos-6.7
+  - name: rockylinux-9.1
     run_list:
       - recipe[net_setup::default]
+    # driver:
+    #   network:
+    #   - ["private_network", {ip: "10.1.0.10"}]
+    #   - ["private_network", {ip: "10.2.0.10"}]
+    #   - ["private_network", {ip: "10.3.0.10"}]
+    #   - ["private_network", {ip: "10.4.0.10"}]
+    #   - ["private_network", {ip: "10.5.0.10"}]
+    #   - ["private_network", {ip: "10.6.0.10"}]
+    #   - ["private_network", {ip: "10.7.0.10"}]
+    #   - ["private_network", {ip: "10.8.0.10"}]
   - name: win-2012r2
     driver:
       box: opentable/win-2012r2-standard-amd64-nocm

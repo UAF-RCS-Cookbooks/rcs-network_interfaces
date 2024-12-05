@@ -21,3 +21,5 @@ bin/*
 
 .chef
 .cinc
+
+.DS_Store
