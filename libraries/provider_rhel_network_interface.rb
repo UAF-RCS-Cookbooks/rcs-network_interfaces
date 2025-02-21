@@ -86,7 +86,8 @@ class Chef
                         ovsdhcpinterfaces: new_resource.ovsdhcpinterfaces
               # notifies :run, "execute[reload interface #{new_resource.device}]", new_resource.reload_type if new_resource.reload
               # notifies :run, "execute[post up command for #{new_resource.device}]", :immediately unless new_resource.post_up.nil?
-          else
+          end
+        else
             template "/etc/sysconfig/network-scripts/ifcfg-#{new_resource.device}" do
               cookbook new_resource.cookbook
               source new_resource.source
