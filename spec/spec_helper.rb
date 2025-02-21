@@ -12,5 +12,3 @@ end
 
 # Add libraries to our LOAD_PATH
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'libraries'))
-
-at_exit { ChefSpec::Coverage.report! } unless Object.const_defined?('Guard')

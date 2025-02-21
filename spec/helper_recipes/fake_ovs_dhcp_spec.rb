@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe 'fake::ovs_dhcp' do
-  context 'when platform_family rhel 6.x' do
+  context 'when platform_family rhel 6' do
     cached(:chef_run) do
-      ChefSpec::SoloRunner.new(platform: 'redhat', version: '6.5',
+      ChefSpec::SoloRunner.new(platform: 'redhat', version: '6',
                                step_into: ['rhel_network_interface',
                                            'network_interface'])
                           .converge(described_recipe)
@@ -212,9 +212,9 @@ OVS_BRIDGE="ovsbr1"
     end
   end
 
-  context 'when platform_family rhel 7.x' do
+  context 'when platform_family rhel 7' do
     cached(:chef_run) do
-      ChefSpec::SoloRunner.new(platform: 'redhat', version: '7.0',
+      ChefSpec::SoloRunner.new(platform: 'redhat', version: '7',
                                step_into: ['rhel_network_interface',
                                            'network_interface'])
                           .converge(described_recipe)

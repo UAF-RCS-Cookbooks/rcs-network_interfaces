@@ -1,6 +1,6 @@
 #
 # Author:: Jacob McCann (<jacob.mccann2@target.com>)
-# Cookbook Name:: rcs-network_interfaces
+# Cookbook:: rcs-network_interfaces
 # Provider:: network_interface
 #
 # Copyright:: 2015, Target Corporation
@@ -26,8 +26,6 @@ class Chef
     # Chef Provider for Network Interfaces
     #
     class NetworkInterface < Chef::Provider::LWRPBase
-      use_inline_resources if defined?(use_inline_resources)
-
       action :create do
         raise Chef::Exceptions::UnsupportedAction, "#{self} does not support :create"
       end

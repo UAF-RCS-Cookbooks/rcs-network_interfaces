@@ -1,6 +1,6 @@
 #
 # Author:: Jacob McCann (<jacob.mccann2@target.com>)
-# Cookbook Name:: rcs-network_interfaces
+# Cookbook:: rcs-network_interfaces
 # Provider:: rhel_network_interface
 #
 # Copyright:: 2015, Target Corporation
@@ -30,7 +30,7 @@ class Chef
         provides :rhel_network_interface, os: 'linux', platform_family: %w(rhel fedora) if respond_to?(:provides)
 
         action :create do
-          package 'vconfig' do # ~FC005 Not sure why this triggered ...
+          package 'vconfig' do
             not_if { new_resource.vlan.nil? }
             only_if { node['platform_version'].to_i < 7 }
           end
@@ -48,7 +48,7 @@ class Chef
             template "/etc/NetworkManager/system-connections/#{new_resource.device}.nmconnection" do
               cookbook new_resource.cookbook
               source new_resource.source
-              mode 0600
+              mode '0600'
               variables device: new_resource.device,
                         type: new_resource.type,
                         uuid: new_resource.uuid,
@@ -86,12 +86,12 @@ class Chef
                         ovsdhcpinterfaces: new_resource.ovsdhcpinterfaces
               # notifies :run, "execute[reload interface #{new_resource.device}]", new_resource.reload_type if new_resource.reload
               # notifies :run, "execute[post up command for #{new_resource.device}]", :immediately unless new_resource.post_up.nil?
-          end
-        else
+            end
+          else
             template "/etc/sysconfig/network-scripts/ifcfg-#{new_resource.device}" do
               cookbook new_resource.cookbook
               source new_resource.source
-              mode 0644
+              mode '0644'
               variables device: new_resource.device,
                         type: new_resource.type,
                         uuid: new_resource.uuid,

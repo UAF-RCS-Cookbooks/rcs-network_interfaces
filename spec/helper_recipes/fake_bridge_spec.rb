@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'fake::bridge' do
   describe 'rhel family' do
     let(:chef_run) do
-      ChefSpec::SoloRunner.new(platform: 'redhat', version: '6.5', step_into: ['rhel_network_interface']).converge(described_recipe)
+      ChefSpec::SoloRunner.new(platform: 'redhat', version: '6', step_into: ['rhel_network_interface']).converge(described_recipe)
     end
 
     it 'installs packages required for bridge config on interface' do
@@ -17,7 +17,7 @@ describe 'fake::bridge' do
 
   describe 'debian family' do
     let(:chef_run) do
-      ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '14.04', step_into: ['debian_network_interface']).converge(described_recipe)
+      ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '20.04', step_into: ['debian_network_interface']).converge(described_recipe)
     end
 
     it 'installs packages required for vlan config on interface' do

@@ -1,6 +1,6 @@
 #
 # Author:: Jacob McCann (<jacob.mccann2@target.com>)
-# Cookbook Name:: rcs-network_interfaces
+# Cookbook:: rcs-network_interfaces
 # Provider:: win_network_interface
 #
 # Copyright:: 2015, Target Corporation
