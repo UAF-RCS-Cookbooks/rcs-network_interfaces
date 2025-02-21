@@ -19,6 +19,7 @@
 #
 
 require_relative 'resource_network_interface'
+require 'securerandom'
 
 class Chef
   class Resource
@@ -38,99 +39,44 @@ class Chef
 
           @type = 'Ethernet'
           @nm_controlled = false
+
+          if node['platform_version'].to_i >= 9
+            @nm_controlled = true
+            if name.start_with?('br')
+              @type = 'Bridge'
+            end
+          end
+
+          if @vlan == true
+            @type = 'Vlan'
+          end
+
+          # @uuid = SecureRandom.uuid
         end
 
-        def nm_controlled(arg = nil)
-          set_or_return(:nm_controlled, arg, kind_of: [TrueClass, FalseClass])
-        end
-
-        def ipv6init(arg = nil)
-          set_or_return(:ipv6init, arg, kind_of: [TrueClass, FalseClass])
-        end
-
-        def nozeroconf(arg = nil)
-          set_or_return(:nozeroconf, arg, kind_of: [TrueClass, FalseClass])
-        end
-
-        def userctl(arg = nil)
-          set_or_return(:userctl, arg, kind_of: [TrueClass, FalseClass])
-        end
-
-        def peerdns(arg = nil)
-          set_or_return(:peerdns, arg, kind_of: [TrueClass, FalseClass])
-        end
-
-        def bridge_device(arg = nil)
-          set_or_return(:bridge_device, arg, kind_of: String)
-        end
-
-        def network(arg = nil)
-          set_or_return(:network, arg, kind_of: String)
-        end
-
-        def type(arg = nil)
-          set_or_return(:type, arg, kind_of: String)
-        end
-
-        def uuid(arg = nil)
-          set_or_return(:uuid, arg, kind_of: String)
-        end
-        
-        def devicetype(arg = nil)
-          set_or_return(:devicetype, arg, kind_of: String)
-        end
-
-        def ovs_bridge(arg = nil)
-          set_or_return(:ovs_bridge, arg, kind_of: String)
-        end
-
-        def vlan(arg = nil)
-          set_or_return(:vlan, arg, kind_of: [TrueClass, FalseClass])
-        end
-
-        def mac_address(arg = nil)
-          set_or_return(:mac_address, arg, kind_of: String, regex: /^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$/)
-        end
-
-        def dns(arg = nil)
-          set_or_return(:dns, arg, kind_of: [String, Array])
-        end
-
-        def prefix(arg = nil)
-          set_or_return(:prefix, arg, kind_of: Integer)
-        end
-
-        def dns_domain(arg = nil)
-          set_or_return(:dns_domain, arg, kind_of: String)
-        end
-
-        def zone(arg = nil)
-          set_or_return(:zone, arg, kind_of: String)
-        end
-
-        def arpcheck(arg = nil)
-          set_or_return(:arpcheck, arg, kind_of: [TrueClass, FalseClass])
-        end
-
-        def hotplug(arg = nil)
-          set_or_return(:hotplug, arg, kind_of: [TrueClass, FalseClass])
-        end
-
-        def metric(arg = nil)
-          set_or_return(:metric, arg, kind_of: Integer)
-        end
-
-        def defroute(arg = nil)
-          set_or_return(:defroute, arg, kind_of: [TrueClass, FalseClass])
-        end
-
-        def ovsbootproto(arg = nil)
-          set_or_return(:ovsbootproto, arg, kind_of: String)
-        end
-
-        def ovsdhcpinterfaces(arg = nil)
-          set_or_return(:ovsdhcpinterfaces, arg, kind_of: [String, Array])
-        end
+        property :nm_controlled, [TrueClass, FalseClass]
+        property :ipv6init, [TrueClass, FalseClass]
+        property :nozeroconf, [TrueClass, FalseClass]
+        property :userctl, [TrueClass, FalseClass]
+        property :peerdns, [TrueClass, FalseClass]
+        property :bridge_device, String
+        property :network, String
+        property :type, String
+        property :uuid, String
+        property :devicetype, String
+        property :ovs_bridge, String
+        property :vlan, [TrueClass, FalseClass]
+        property :mac_address, String, regex: /^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$/
+        property :dns, [String, Array]
+        property :prefix, Integer
+        property :dns_domain, String
+        property :zone, String
+        property :arpcheck, [TrueClass, FalseClass]
+        property :hotplug, [TrueClass, FalseClass]
+        property :metric, Integer
+        property :defroute, [TrueClass, FalseClass]
+        property :ovsbootproto, String
+        property :ovsdhcpinterfaces, [String, Array]
       end
     end
   end

@@ -69,7 +69,7 @@ class Chef
           template "/etc/network/interfaces.d/#{new_resource.name}" do
             cookbook new_resource.cookbook
             source new_resource.source
-            mode 0644
+            mode '0644'
             variables device: new_resource.device,
                       type: new_resource.type,
                       network_type: network_type,

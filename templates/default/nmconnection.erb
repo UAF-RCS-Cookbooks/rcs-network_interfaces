@@ -8,6 +8,7 @@ type=<%= @type.downcase! %>
 autoconnect-retries=1
 interface-name=<%= @device %>
 
+
 [bond]
 
 [bridge]
@@ -44,3 +45,6 @@ method=auto
 org.freedesktop.NetworkManager.origin=nm-initrd-generator
 
 [vlan]
+<% if @vlan_id -%>
+id=<%= @vlan_id %>
+<% end %>
