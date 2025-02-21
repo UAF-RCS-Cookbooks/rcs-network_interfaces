@@ -6,7 +6,7 @@ description      'Providers for configuring network on Ubuntu, RHEL, and Windows
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 source_url       'https://github.com/target/rcs-network_interfaces-cookbook'
 issues_url       'https://github.com/target/rcs-network_interfaces-cookbook/issues'
-version          '2.11.2'
+version          '3.0.0'
 chef_version     '>= 12'
 
 supports 'ubuntu', '>= 14.04'

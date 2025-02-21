@@ -19,6 +19,7 @@
 #
 
 require 'chef/resource'
+require 'ipaddr'
 
 class Chef
   class Resource
@@ -39,7 +40,11 @@ class Chef
         @bootproto = 'dhcp'
         @onboot = true
         @cookbook = 'rcs-network_interfaces'
-        @source = 'ifcfg.erb'
+        if node['platform_version'].to_i >= 9 && node['platform_family'] == 'rhel'
+          @source = 'nmconnection.erb'
+        else
+          @source = 'ifcfg.erb'
+        end
         @reload = true
         @reload_type = :immediately
       end
@@ -93,7 +98,11 @@ class Chef
       end
 
       def netmask(arg = nil)
-        set_or_return(:mask, arg, kind_of: String)
+        if node['platform_version'].to_i >= 9 && node['platform_family'] == 'rhel'
+          arg = IPAddr.new(arg.to_s).to_i.to_s(2).count("1").to_s unless arg.nil?
+        else
+          set_or_return(:mask, arg, kind_of: String)
+        end
       end
 
       def broadcast(arg = nil)

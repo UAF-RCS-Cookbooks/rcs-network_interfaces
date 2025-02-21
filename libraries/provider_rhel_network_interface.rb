@@ -44,49 +44,92 @@ class Chef
             only_if { node['platform_version'].to_i < 8 }
           end
 
-          template "/etc/sysconfig/network-scripts/ifcfg-#{new_resource.device}" do
-            cookbook new_resource.cookbook
-            source new_resource.source
-            mode 0644
-            variables device: new_resource.device,
-                      type: new_resource.type,
-                      uuid: new_resource.uuid,
-                      onboot: new_resource.onboot,
-                      bootproto: new_resource.bootproto,
-                      address: new_resource.address,
-                      network: new_resource.network,
-                      netmask: new_resource.netmask,
-                      gateway: new_resource.gateway,
-                      mac_address: new_resource.mac_address,
-                      hw_address: new_resource.hw_address,
-                      broadcast: new_resource.broadcast,
-                      bridge_device: new_resource.bridge_device,
-                      bridge_stp: new_resource.bridge_stp,
-                      vlan: new_resource.vlan,
-                      bond_mode: new_resource.bond_mode,
-                      bond_master: new_resource.bond_master,
-                      nm_controlled: new_resource.nm_controlled,
-                      ipv6init: new_resource.ipv6init,
-                      nozeroconf: new_resource.nozeroconf,
-                      userctl: new_resource.userctl,
-                      peerdns: new_resource.peerdns,
-                      mtu: new_resource.mtu,
-                      devicetype: new_resource.devicetype,
-                      ovs_bridge: new_resource.ovs_bridge,
-                      dns: new_resource.dns,
-                      prefix: new_resource.prefix,
-                      domain: new_resource.dns_domain,
-                      zone: new_resource.zone,
-                      arpcheck: new_resource.arpcheck,
-                      hotplug: new_resource.hotplug,
-                      metric: new_resource.metric,
-                      defroute: new_resource.defroute,
-                      ovsbootproto: new_resource.ovsbootproto,
-                      ovsdhcpinterfaces: new_resource.ovsdhcpinterfaces
-            notifies :run, "execute[reload interface #{new_resource.device}]", new_resource.reload_type if new_resource.reload
-            notifies :run, "execute[post up command for #{new_resource.device}]", :immediately unless new_resource.post_up.nil?
+          if node['platform_version'].to_i >= 9 && node['platform_family'] == 'rhel'
+            template "/etc/NetworkManager/system-connections/#{new_resource.device}.nmconnection" do
+              cookbook new_resource.cookbook
+              source new_resource.source
+              mode 0600
+              variables device: new_resource.device,
+                        type: new_resource.type,
+                        uuid: new_resource.uuid,
+                        onboot: new_resource.onboot,
+                        bootproto: new_resource.bootproto,
+                        address: new_resource.address,
+                        network: new_resource.network,
+                        netmask: new_resource.netmask,
+                        gateway: new_resource.gateway,
+                        mac_address: new_resource.mac_address,
+                        hw_address: new_resource.hw_address,
+                        broadcast: new_resource.broadcast,
+                        bridge_device: new_resource.bridge_device,
+                        bridge_stp: new_resource.bridge_stp,
+                        vlan: new_resource.vlan,
+                        bond_mode: new_resource.bond_mode,
+                        bond_master: new_resource.bond_master,
+                        nm_controlled: new_resource.nm_controlled,
+                        ipv6init: new_resource.ipv6init,
+                        nozeroconf: new_resource.nozeroconf,
+                        userctl: new_resource.userctl,
+                        peerdns: new_resource.peerdns,
+                        mtu: new_resource.mtu,
+                        devicetype: new_resource.devicetype,
+                        ovs_bridge: new_resource.ovs_bridge,
+                        dns: new_resource.dns,
+                        prefix: new_resource.prefix,
+                        domain: new_resource.dns_domain,
+                        zone: new_resource.zone,
+                        arpcheck: new_resource.arpcheck,
+                        hotplug: new_resource.hotplug,
+                        metric: new_resource.metric,
+                        defroute: new_resource.defroute,
+                        ovsbootproto: new_resource.ovsbootproto,
+                        ovsdhcpinterfaces: new_resource.ovsdhcpinterfaces
+              # notifies :run, "execute[reload interface #{new_resource.device}]", new_resource.reload_type if new_resource.reload
+              # notifies :run, "execute[post up command for #{new_resource.device}]", :immediately unless new_resource.post_up.nil?
+          else
+            template "/etc/sysconfig/network-scripts/ifcfg-#{new_resource.device}" do
+              cookbook new_resource.cookbook
+              source new_resource.source
+              mode 0644
+              variables device: new_resource.device,
+                        type: new_resource.type,
+                        uuid: new_resource.uuid,
+                        onboot: new_resource.onboot,
+                        bootproto: new_resource.bootproto,
+                        address: new_resource.address,
+                        network: new_resource.network,
+                        netmask: new_resource.netmask,
+                        gateway: new_resource.gateway,
+                        mac_address: new_resource.mac_address,
+                        hw_address: new_resource.hw_address,
+                        broadcast: new_resource.broadcast,
+                        bridge_device: new_resource.bridge_device,
+                        bridge_stp: new_resource.bridge_stp,
+                        vlan: new_resource.vlan,
+                        bond_mode: new_resource.bond_mode,
+                        bond_master: new_resource.bond_master,
+                        nm_controlled: new_resource.nm_controlled,
+                        ipv6init: new_resource.ipv6init,
+                        nozeroconf: new_resource.nozeroconf,
+                        userctl: new_resource.userctl,
+                        peerdns: new_resource.peerdns,
+                        mtu: new_resource.mtu,
+                        devicetype: new_resource.devicetype,
+                        ovs_bridge: new_resource.ovs_bridge,
+                        dns: new_resource.dns,
+                        prefix: new_resource.prefix,
+                        domain: new_resource.dns_domain,
+                        zone: new_resource.zone,
+                        arpcheck: new_resource.arpcheck,
+                        hotplug: new_resource.hotplug,
+                        metric: new_resource.metric,
+                        defroute: new_resource.defroute,
+                        ovsbootproto: new_resource.ovsbootproto,
+                        ovsdhcpinterfaces: new_resource.ovsdhcpinterfaces
+              notifies :run, "execute[reload interface #{new_resource.device}]", new_resource.reload_type if new_resource.reload
+              notifies :run, "execute[post up command for #{new_resource.device}]", :immediately unless new_resource.post_up.nil?
+            end
           end
-
           execute "reload interface #{new_resource.device}" do
             command <<-EOF
               ifdown #{new_resource.device}
