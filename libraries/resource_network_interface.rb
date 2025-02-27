@@ -65,15 +65,15 @@ class Chef
         set_or_return(:type, arg, kind_of: String)
       end
 
-      def bridge_stp(arg = nil)
+      def bridge_stp(arg = nil) # Needs added to NM
         set_or_return(:bridge_stp, arg, kind_of: [TrueClass, FalseClass])
       end
 
-      def bond_master(arg = nil)
+      def bond_master(arg = nil) # Needs added to NM
         set_or_return(:bond_master, arg, kind_of: String)
       end
 
-      def bond_mode(arg = nil)
+      def bond_mode(arg = nil) # Needs added to NM
         set_or_return(:bond_mode, arg, kind_of: String)
       end
 
@@ -81,7 +81,7 @@ class Chef
         set_or_return(:onboot, arg, kind_of: [TrueClass, FalseClass])
       end
 
-      def bootproto(arg = nil)
+      def bootproto(arg = nil) # Needs added to NM
         set_or_return(:bootproto, arg, kind_of: String)
       end
 
@@ -105,15 +105,15 @@ class Chef
         end
       end
 
-      def broadcast(arg = nil)
+      def broadcast(arg = nil) # Needs added to NM
         set_or_return(:broadcast, arg, kind_of: String)
       end
 
-      def reload(arg = nil)
+      def reload(arg = nil) # Needs added to NM
         set_or_return(:reload, arg, kind_of: [TrueClass, FalseClass])
       end
 
-      def reload_type(arg = nil)
+      def reload_type(arg = nil) # Needs added to NM
         set_or_return(:reload_type, arg, kind_of: Symbol)
       end
 
@@ -125,7 +125,7 @@ class Chef
         set_or_return(:vlan, arg, kind_of: [TrueClass, FalseClass, String, Integer])
       end
 
-      def post_up(arg = nil)
+      def post_up(arg = nil) # Needs added to NM
         set_or_return(:post_up, arg, kind_of: [String, Array])
       end
     end

@@ -47,36 +47,32 @@ class Chef
             end
           end
 
-          if @vlan == true
-            @type = 'Vlan'
-          end
-
           # @uuid = SecureRandom.uuid
         end
 
-        property :nm_controlled, [TrueClass, FalseClass]
+        property :nm_controlled, [TrueClass, FalseClass] 
         property :ipv6init, [TrueClass, FalseClass]
-        property :nozeroconf, [TrueClass, FalseClass]
-        property :userctl, [TrueClass, FalseClass]
-        property :peerdns, [TrueClass, FalseClass]
-        property :bridge_device, String
-        property :network, String
+        property :nozeroconf, [TrueClass, FalseClass] # Needs added to NM
+        property :userctl, [TrueClass, FalseClass] # Needs added to NM
+        property :peerdns, [TrueClass, FalseClass] # Needs added to NM
+        property :bridge_device, String # Needs added to NM
+        property :network, String # Needs added to NM
         property :type, String
-        property :uuid, String
+        property :uuid, String # Needs added to NM
         property :devicetype, String
-        property :ovs_bridge, String
-        property :vlan, [TrueClass, FalseClass]
+        property :ovs_bridge, String # Needs added to NM
         property :mac_address, String, regex: /^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$/
-        property :dns, [String, Array]
-        property :prefix, Integer
-        property :dns_domain, String
-        property :zone, String
-        property :arpcheck, [TrueClass, FalseClass]
-        property :hotplug, [TrueClass, FalseClass]
-        property :metric, Integer
-        property :defroute, [TrueClass, FalseClass]
-        property :ovsbootproto, String
-        property :ovsdhcpinterfaces, [String, Array]
+        property :dns, [String, Array] # Needs added to NM
+        property :prefix, Integer # Needs added to NM
+        property :dns_domain, String # Needs added to NM
+        property :zone, String # Needs added to NM
+        property :vlan, [TrueClass, FalseClass]
+        property :arpcheck, [TrueClass, FalseClass] # Needs added to NM
+        property :hotplug, [TrueClass, FalseClass] # Needs added to NM
+        property :metric, Integer # Needs added to NM
+        property :defroute, [TrueClass, FalseClass] # Needs added to NM
+        property :ovsbootproto, String # Needs added to NM
+        property :ovsdhcpinterfaces, [String, Array] # Needs added to NM
       end
     end
   end
