@@ -16,6 +16,12 @@ autoconnect=true
 <% else -%>
 autoconnect=false
 <% end %>
+<% if @bridge_device -%>
+controller=<%= @bridge_device %>
+master=<%= @bridge_device %>
+port-type=bridge
+slave-type=bridge
+<% end %>
 
 [bond]
 
