@@ -21,16 +21,12 @@ platforms:
   - name: rockylinux-9.4
     run_list:
       - recipe[fake::default]
-    # driver:
-    #   network:
-    #   - ["private_network", {ip: "10.1.0.10"}]
-    #   - ["private_network", {ip: "10.2.0.10"}]
-    #   - ["private_network", {ip: "10.3.0.10"}]
-    #   - ["private_network", {ip: "10.4.0.10"}]
-    #   - ["private_network", {ip: "10.5.0.10"}]
-    #   - ["private_network", {ip: "10.6.0.10"}]
-    #   - ["private_network", {ip: "10.7.0.10"}]
-    #   - ["private_network", {ip: "10.8.0.10"}]
+    driver:
+      network:
+      - ["private_network", {ip: "10.19.75.10"}]
+      - ["private_network", {ip: "10.19.75.11"}]
+      - ["private_network", {ip: "10.19.75.12"}]
+      - ["private_network", {ip: "10.19.75.13"}]
   - name: win-2012r2
     driver:
       box: opentable/win-2012r2-standard-amd64-nocm

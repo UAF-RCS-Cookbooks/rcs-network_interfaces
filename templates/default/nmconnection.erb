@@ -6,6 +6,8 @@ uuid=<%= @uuid %>
 <% end %>
 <% if @vlan == true -%>
 type=vlan
+<% elsif @type == "bond" -%>
+type=bond
 <% else -%>
 type=<%= @type.downcase! %>
 <% end %>
@@ -22,8 +24,17 @@ master=<%= @bridge_device %>
 port-type=bridge
 slave-type=bridge
 <% end %>
+<% if @bond_master -%>
+controller=<%= @bond_master %>
+master=<%= @bond_master %>
+port-type=bond
+slave-type=bond
+<% end %>
 
 [bond]
+<% if @bond_mode -%>
+mode=<%= @bond_mode %>
+<% end %>
 
 [bridge]
 
