@@ -33,7 +33,9 @@ slave-type=bond
 
 [bond]
 <% if @bond_mode -%>
-mode=<%= @bond_mode %>
+<% @bond_mode.split.each do |option| -%>
+<%= option %>
+<% end -%>
 <% end %>
 
 [bridge]
