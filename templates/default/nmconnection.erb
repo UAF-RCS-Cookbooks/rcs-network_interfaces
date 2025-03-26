@@ -71,13 +71,8 @@ method=auto
 method=disabled
 <% end %>
 
-[proxy]
-
-[user]
-org.freedesktop.NetworkManager.origin=nm-initrd-generator
-
-[vlan]
 <% if @vlan == true -%>
+[vlan]
 id=<%= @device.split(".")[1] %>
-<% end %>
 flags=1
+<% end %>
