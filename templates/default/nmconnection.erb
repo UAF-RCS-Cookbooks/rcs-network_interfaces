@@ -6,7 +6,7 @@ uuid=<%= @uuid %>
 <% end %>
 <% if @vlan == true -%>
 type=vlan
-<% elsif @type == "bond" -%>
+<% elsif @bond_mode -%>
 type=bond
 <% else -%>
 type=<%= @type.downcase! %>
@@ -64,7 +64,6 @@ method=auto
 
 [ipv6]
 addr-gen-mode=default
-method=auto
 <% if @ipv6init == true -%>
 method=auto
 <% else -%>
@@ -75,4 +74,5 @@ method=disabled
 [vlan]
 id=<%= @device.split(".")[1] %>
 flags=1
+parent=<%= @device.split(".")[0] %>
 <% end %>
