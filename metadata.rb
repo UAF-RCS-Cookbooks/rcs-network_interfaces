@@ -5,7 +5,7 @@ license          'Apache-2.0'
 description      'Providers for configuring network on Ubuntu, RHEL, and Windows'
 source_url       'https://github.com/target/rcs-network_interfaces-cookbook'
 issues_url       'https://github.com/target/rcs-network_interfaces-cookbook/issues'
-version          '3.0.4'
+version          '3.0.7'
 chef_version     '>= 12'
 
 supports 'ubuntu', '>= 14.04'

@@ -84,8 +84,7 @@ class Chef
                         defroute: new_resource.defroute,
                         ovsbootproto: new_resource.ovsbootproto,
                         ovsdhcpinterfaces: new_resource.ovsdhcpinterfaces
-              # notifies :run, "execute[reload interface #{new_resource.device}]", new_resource.reload_type if new_resource.reload
-              # notifies :run, "execute[post up command for #{new_resource.device}]", :immediately unless new_resource.post_up.nil?
+              notifies :run, "execute[reload systemd]", new_resource.reload_type if new_resource.reload
             end
           else
             template "/etc/sysconfig/network-scripts/ifcfg-#{new_resource.device}" do
@@ -141,6 +140,15 @@ class Chef
 
           execute "post up command for #{new_resource.device}" do
             command new_resource.post_up
+            action :nothing
+          end
+
+          execute "reload systemd" do
+            command <<-EOF
+              systemctl daemon-reload
+              nmcli con down #{new_resource.device}
+              nmcli con up #{new_resource.device}
+            EOF
             action :nothing
           end
         end

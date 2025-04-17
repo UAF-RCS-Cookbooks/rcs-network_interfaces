@@ -40,7 +40,7 @@ slave-type=bond
 
 [bridge]
 
-[ethernet]
+[802-3-ethernet]
 <% if @mac_address -%>
 mac-address=<%= @mac_address %>
 <% end %>
@@ -52,10 +52,10 @@ mtu=<%= @mtu %>
 <% if @address and @netmask and @gateway -%>
 address1=<%= @address %>/<%= @netmask %>,<%= @gateway %>
 method=manual
-<% elsif @address and @netmask -%>
+<% elsif @address and @netmask and !@gateway -%>
 address1=<%= @address %>/<%= @netmask %>
 method=manual
-<% elsif @address -%>
+<% elsif @address and !@netmask and !@gateway-%>
 address1=<%= @address %>
 method=manual
 <% elsif %>
